@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Stack Development ePortfolio - CET138</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #ecf0f1;
+            --text-dark: #2c3e50;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        nav.navbar {
+            background: var(--primary-color) !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: white !important;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.8) !important;
+            transition: all 0.3s ease;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: white !important;
+            background: var(--secondary-color);
+            padding: 8px 15px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin-bottom: 50px;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 10px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .section-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .section-title {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--secondary-color);
+            padding-bottom: 15px;
+        }
+
+        .subsection {
+            margin: 30px 0;
+        }
+
+        .subsection h3 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .subsection p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        /* Code Blocks */
+        .code-example {
+            background: #f8f9fa;
+            border-left: 4px solid var(--secondary-color);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+
+        .code-example code {
+            color: #d63384;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95rem;
+        }
+
+        /* Demo Boxes */
+        .demo-box {
+            background: var(--light-bg);
+            border: 2px solid var(--secondary-color);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .demo-title {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* HTML Demo */
+        .html-demo {
+            text-align: left;
+        }
+
+        .html-demo h4 {
+            color: var(--secondary-color);
+            margin-top: 15px;
+        }
+
+        .html-elements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .element-card {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .element-card strong {
+            color: var(--secondary-color);
+        }
+
+        /* CSS Demo */
+        .css-demo-box {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: 500;
+        }
+
+        .box1 {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .box2 {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            transform: skewX(-10deg);
+        }
+
+        .box3 {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        /* Bootstrap Demo */
+        .btn-demo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .grid-demo {
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: var(--secondary-color);
+            color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* JavaScript Demo */
+        .js-demo {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .counter-display {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .demo-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .color-input {
+            width: 100%;
+            height: 50px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .todo-container {
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .todo-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .todo-input-group input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .todo-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .todo-item.completed {
+            background: #e8f5e9;
+            text-decoration: line-through;
+            color: #999;
+        }
+
+        .todo-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .todo-buttons button {
+            padding: 5px 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 50px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-card {
+                padding: 20px;
+            }
+        }
+
+        /* Contact Form Styling */
+        .contact-form {
+            max-width: 600px;
+            margin: 30px auto;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .info-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .info-card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+            word-break: break-all;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: var(--accent-color);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #28a745;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideIn 0.3s ease-in;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand">Full Stack Portfolio</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="showSection(0)">About Me</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection(1)">Full Stack</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection(2)">HTML</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection(3)">CSS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection(4)">Bootstrap</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection(5)">JavaScript</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showSection(6)">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Diwas Adhikari</h1>
+        <p style="font-size: 1.8rem; margin-bottom: 10px;">Full Stack Development Portfolio</p>
+        <p>CET138 Assignment 1 - Demonstrating Core Web Technologies</p>
+        <p style="font-size: 1rem; opacity: 0.9;">Click the navigation menu to explore each section</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        
+        <!-- Section 0: About Me -->
+        <div class="section-card active" id="section-0">
+            <h2 class="section-title">About Me</h2>
+            
+            <div style="text-align: center; margin-bottom: 40px;">
+                <div style="width: 150px; height: 150px; margin: 0 auto 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; box-shadow: 0 5px 20px rgba(0,0,0,0.2);">
+                    👨‍💻
+                </div>
+                <h3 style="color: #2c3e50; margin-bottom: 10px; font-size: 2rem;">Diwas Adhikari</h3>
+                <p style="color: #7f8c8d; font-size: 1.1rem; margin-bottom: 20px;">Full Stack Development Student | CET138</p>
+            </div>
+
+            <div class="subsection">
+                <h3>Welcome to My Portfolio</h3>
+                <p>Hello! I'm Diwas Adhikari, an aspiring full stack developer passionate about creating dynamic, responsive web applications. This portfolio showcases my understanding and practical skills in modern web development technologies.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>My Journey</h3>
+                <p>Through the CET138 Full Stack Development module, I have gained comprehensive knowledge of front-end and back-end technologies. I have developed hands-on experience in building interactive web applications using HTML, CSS, JavaScript, and Bootstrap framework.</p>
+            </div>
+
+            <div class="demo-box">
+                <div class="demo-title">Technical Skills</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 20px;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #e74c3c; display: block; font-size: 1.3rem; margin-bottom: 5px;">🏗️</strong>
+                        <strong style="display: block; margin-bottom: 5px;">HTML</strong>
+                        <small>Structure & Semantics</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #3498db; display: block; font-size: 1.3rem; margin-bottom: 5px;">🎨</strong>
+                        <strong style="display: block; margin-bottom: 5px;">CSS</strong>
+                        <small>Styling & Layouts</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #f39c12; display: block; font-size: 1.3rem; margin-bottom: 5px;">⚡</strong>
+                        <strong style="display: block; margin-bottom: 5px;">JavaScript</strong>
+                        <small>Interactivity</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #9b59b6; display: block; font-size: 1.3rem; margin-bottom: 5px;">📱</strong>
+                        <strong style="display: block; margin-bottom: 5px;">Bootstrap</strong>
+                        <small>Responsive Design</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #1abc9c; display: block; font-size: 1.3rem; margin-bottom: 5px;">🔗</strong>
+                        <strong style="display: block; margin-bottom: 5px;">Version Control</strong>
+                        <small>Git & GitHub</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #e67e22; display: block; font-size: 1.3rem; margin-bottom: 5px;">💡</strong>
+                        <strong style="display: block; margin-bottom: 5px;">Problem Solving</strong>
+                        <small>Logical Thinking</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>What You'll Find Here</h3>
+                <p>This portfolio is organized into the following sections, each demonstrating a key technology in modern web development:</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Full Stack Development:</strong> Understanding the complete web development ecosystem</li>
+                    <li><strong>HTML:</strong> Semantic markup and document structure</li>
+                    <li><strong>CSS:</strong> Styling, layouts, and responsive design</li>
+                    <li><strong>Bootstrap:</strong> Framework for rapid, responsive development</li>
+                    <li><strong>JavaScript:</strong> Interactivity and dynamic functionality</li>
+                </ul>
+            </div>
+
+            <div class="demo-box">
+                <div class="demo-title">Portfolio Statistics</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 20px; text-align: center;">
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #3498db;">5</div>
+                        <div style="color: #7f8c8d;">Sections</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #e74c3c;">3</div>
+                        <div style="color: #7f8c8d;">Interactive Demos</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #27ae60;">20+</div>
+                        <div style="color: #7f8c8d;">Code Examples</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; font-weight: 700; color: #9b59b6;">100%</div>
+                        <div style="color: #7f8c8d;">Responsive</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Let's Explore Together</h3>
+                <p>Navigate through the sections using the menu above to see practical demonstrations and detailed explanations of each technology. Each section includes working examples and comprehensive documentation of my understanding.</p>
+                <p style="margin-top: 20px; padding: 20px; background: #e8f4f8; border-left: 4px solid #3498db; border-radius: 5px;">
+                    <strong>📌 Tip:</strong> Click on the navigation menu items to explore different technologies and see them in action with interactive demonstrations!
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 1: What is Full Stack Development -->
+        <div class="section-card" id="section-1">
+            <h2 class="section-title">What is Full Stack Development?</h2>
+            
+            <div class="subsection">
+                <h3>Definition</h3>
+                <p>Full Stack Development refers to the creation of complete web applications, encompassing both the front-end (client-side) and back-end (server-side) components. A full stack developer possesses the skills to work across all layers of a web application.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>The Technology Stack</h3>
+                <p>A typical full stack consists of:</p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Front-End:</strong> HTML, CSS, JavaScript - technologies users interact with directly</li>
+                    <li><strong>Back-End:</strong> Server-side languages (Python, Node.js, Java, etc.) - handles business logic and data</li>
+                    <li><strong>Database:</strong> Stores and manages application data (MySQL, MongoDB, PostgreSQL)</li>
+                    <li><strong>Server:</strong> Hosts the application and processes requests</li>
+                </ul>
+            </div>
+
+            <div class="demo-box">
+                <div class="demo-title">Full Stack Architecture Overview</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; text-align: center;">
+                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #667eea; display: block; margin-bottom: 10px; font-size: 1.2rem;">🎨 Front-End</strong>
+                        <small>HTML, CSS, JavaScript<br>User Interface</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #764ba2; display: block; margin-bottom: 10px; font-size: 1.2rem;">⚙️ Back-End</strong>
+                        <small>Server Logic<br>API Endpoints</small>
+                    </div>
+                    <div style="background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <strong style="color: #e74c3c; display: block; margin-bottom: 10px; font-size: 1.2rem;">🗄️ Database</strong>
+                        <small>Data Storage<br>Data Retrieval</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Key Responsibilities</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Create responsive, user-friendly interfaces</li>
+                    <li>Develop server-side logic and APIs</li>
+                    <li>Design database schemas</li>
+                    <li>Ensure application security and performance</li>
+                    <li>Deploy and maintain applications</li>
+                    <li>Collaborate with teams and manage version control</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Skills Required</h3>
+                <p><strong>Technical Skills:</strong> Multiple programming languages, databases, version control (Git), APIs, testing, and deployment tools.</p>
+                <p><strong>Soft Skills:</strong> Problem-solving, communication, time management, and ability to learn continuously.</p>
+            </div>
+        </div>
+
+        <!-- Section 2: HTML -->
+        <div class="section-card" id="section-2">
+            <h2 class="section-title">HTML (HyperText Markup Language)</h2>
+            
+            <div class="subsection">
+                <h3>What is HTML?</h3>
+                <p>HTML is the fundamental building block of web pages. It provides the structure and semantic meaning to web content. HTML uses tags (elements) to define different types of content like headings, paragraphs, links, images, and more.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>Key Concepts</h3>
+                <div class="code-example">
+                    <code>
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="en"&gt;<br>
+&nbsp;&nbsp;&lt;head&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;Page Title&lt;/title&gt;<br>
+&nbsp;&nbsp;&lt;/head&gt;<br>
+&nbsp;&nbsp;&lt;body&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Welcome&lt;/h1&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Content goes here&lt;/p&gt;<br>
+&nbsp;&nbsp;&lt;/body&gt;<br>
+&lt;/html&gt;
+                    </code>
+                </div>
+            </div>
+
+            <div class="demo-box html-demo">
+                <div class="demo-title">Common HTML Elements and Their Purpose</div>
+                <div class="html-elements">
+                    <div class="element-card">
+                        <strong>&lt;h1&gt; - &lt;h6&gt;</strong><br>
+                        <small>Heading tags<br>Define headings</small>
+                    </div>
+                    <div class="element-card">
+                        <strong>&lt;p&gt;</strong><br>
+                        <small>Paragraph<br>Text content</small>
+                    </div>
+                    <div class="element-card">
+                        <strong>&lt;a&gt;</strong><br>
+                        <small>Anchor/Link<br>Navigation</small>
+                    </div>
+                    <div class="element-card">
+                        <strong>&lt;img&gt;</strong><br>
+                        <small>Image<br>Display images</small>
+                    </div>
+                    <div class="element-card">
+                        <strong>&lt;ul&gt; / &lt;ol&gt;</strong><br>
+                        <small>Lists<br>Unordered/Ordered</small>
+                    </div>
+                    <div class="element-card">
+                        <strong>&lt;form&gt;</strong><br>
+                        <small>Forms<br>User input</small>
+                    </div>
+                    <div class="element-card">
+                        <strong>&lt;div&gt;</strong><br>
+                        <small>Container<br>Layout grouping</small>
+                    </div>
+                    <div class="element-card">
+                        <strong>&lt;table&gt;</strong><br>
+                        <small>Table<br>Data display</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Semantic HTML5 Elements</h3>
+                <p>HTML5 introduced semantic elements that provide meaning to the structure:</p>
+                <div class="code-example">
+                    <code>
+&lt;header&gt; - Page header<br>
+&lt;nav&gt; - Navigation links<br>
+&lt;article&gt; - Article content<br>
+&lt;section&gt; - Thematic grouping<br>
+&lt;aside&gt; - Sidebar content<br>
+&lt;footer&gt; - Page footer
+                    </code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Form Elements Example</h3>
+                <div class="code-example">
+                    <code>
+&lt;form&gt;<br>
+&nbsp;&nbsp;&lt;input type="text" placeholder="Name"&gt;<br>
+&nbsp;&nbsp;&lt;input type="email" placeholder="Email"&gt;<br>
+&nbsp;&nbsp;&lt;textarea&gt;Message&lt;/textarea&gt;<br>
+&nbsp;&nbsp;&lt;button type="submit"&gt;Submit&lt;/button&gt;<br>
+&lt;/form&gt;
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 3: CSS -->
+        <div class="section-card" id="section-3">
+            <h2 class="section-title">CSS (Cascading Style Sheets)</h2>
+            
+            <div class="subsection">
+                <h3>What is CSS?</h3>
+                <p>CSS is used to style and layout web pages — it controls colors, fonts, spacing, positioning, and visual effects. CSS works by selecting HTML elements and applying visual properties to them.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>CSS Selectors</h3>
+                <div class="code-example">
+                    <code>
+/* Element selector */<br>
+p { color: blue; }<br>
+<br>
+/* Class selector */<br>
+.highlight { background-color: yellow; }<br>
+<br>
+/* ID selector */<br>
+#header { font-size: 24px; }<br>
+<br>
+/* Attribute selector */<br>
+input[type="text"] { border: 1px solid #ddd; }
+                    </code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>CSS Visual Demonstrations</h3>
+                <div class="demo-box">
+                    <div class="demo-title">Box Model & Backgrounds</div>
+                    <div class="css-demo-box box1" style="padding: 30px;">
+                        Box with Gradient Background<br>
+                        Padding: 30px | Margin: auto
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <div class="demo-title">Transforms & Effects</div>
+                    <div class="css-demo-box box2" style="padding: 30px;">
+                        Skewed Box with Transform
+                    </div>
+                </div>
+
+                <div class="demo-box">
+                    <div class="demo-title">Advanced Shapes</div>
+                    <div class="css-demo-box box3">
+                        Circle<br>border-radius: 50%
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Layout Techniques</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Flexbox:</strong> For one-dimensional layouts (rows or columns)</li>
+                    <li><strong>Grid:</strong> For two-dimensional layouts</li>
+                    <li><strong>Positioning:</strong> static, relative, absolute, fixed</li>
+                    <li><strong>Float:</strong> Traditional layout method (less common now)</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Responsive Design</h3>
+                <div class="code-example">
+                    <code>
+/* Mobile First Approach */<br>
+.container { width: 100%; }<br>
+<br>
+/* Tablet */<br>
+@media (min-width: 768px) {<br>
+&nbsp;&nbsp;.container { width: 750px; }<br>
+}<br>
+<br>
+/* Desktop */<br>
+@media (min-width: 1200px) {<br>
+&nbsp;&nbsp;.container { width: 1170px; }<br>
+}
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 4: Bootstrap -->
+        <div class="section-card" id="section-4">
+            <h2 class="section-title">Bootstrap Framework</h2>
+            
+            <div class="subsection">
+                <h3>What is Bootstrap?</h3>
+                <p>Bootstrap is the world's most popular front-end framework for building responsive, mobile-first web applications. It provides pre-built CSS classes and JavaScript components that speed up development and ensure consistency.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>Key Features</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>12-Column Grid System:</strong> Responsive layout foundation</li>
+                    <li><strong>Pre-styled Components:</strong> Buttons, cards, modals, navbars</li>
+                    <li><strong>Utility Classes:</strong> Quick styling without custom CSS</li>
+                    <li><strong>Responsive Design:</strong> Mobile-first approach built-in</li>
+                    <li><strong>JavaScript Components:</strong> Dropdowns, carousels, tooltips</li>
+                    <li><strong>Customization:</strong> Easily themed and extended</li>
+                </ul>
+            </div>
+
+            <div class="demo-box">
+                <div class="demo-title">Bootstrap Button Styles</div>
+                <div class="btn-demo">
+                    <button class="btn btn-primary">Primary</button>
+                    <button class="btn btn-success">Success</button>
+                    <button class="btn btn-info">Info</button>
+                    <button class="btn btn-warning">Warning</button>
+                    <button class="btn btn-danger">Danger</button>
+                    <button class="btn btn-secondary">Secondary</button>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Grid System Example</h3>
+                <div class="code-example">
+                    <code>
+&lt;div class="container"&gt;<br>
+&nbsp;&nbsp;&lt;div class="row"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-md-6"&gt;50% width on medium screens&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="col-md-6"&gt;50% width on medium screens&lt;/div&gt;<br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&lt;/div&gt;
+                    </code>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <div class="demo-title">Bootstrap Grid in Action</div>
+                <div class="grid-demo">
+                    <div class="row">
+                        <div class="col-md-4"><div class="grid-item">col-md-4<br>33% on medium+</div></div>
+                        <div class="col-md-4"><div class="grid-item">col-md-4<br>33% on medium+</div></div>
+                        <div class="col-md-4"><div class="grid-item">col-md-4<br>33% on medium+</div></div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                        <div class="col-md-6"><div class="grid-item">col-md-6<br>50% on medium+</div></div>
+                        <div class="col-md-6"><div class="grid-item">col-md-6<br>50% on medium+</div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Bootstrap Components</h3>
+                <div class="code-example">
+                    <code>
+&lt;!-- Card Component --&gt;<br>
+&lt;div class="card"&gt;<br>
+&nbsp;&nbsp;&lt;div class="card-body"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;h5&gt;Card Title&lt;/h5&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Card content&lt;/p&gt;<br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&lt;/div&gt;<br>
+<br>
+&lt;!-- Modal Component --&gt;<br>
+&lt;div class="modal" id="myModal"&gt;<br>
+&nbsp;&nbsp;&lt;div class="modal-dialog"&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="modal-content"&gt;...&lt;/div&gt;<br>
+&nbsp;&nbsp;&lt;/div&gt;<br>
+&lt;/div&gt;
+                    </code>
+                </div>
+            </div>
+
+            <div class="demo-box">
+                <div class="demo-title">Bootstrap Cards Example</div>
+                <div class="row">
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Card 1</h5>
+                                <p class="card-text">Responsive bootstrap card component</p>
+                                <a href="#" class="btn btn-primary btn-sm">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Card 2</h5>
+                                <p class="card-text">Clean and modern design</p>
+                                <a href="#" class="btn btn-primary btn-sm">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4" style="margin-bottom: 20px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Card 3</h5>
+                                <p class="card-text">Easy to customize</p>
+                                <a href="#" class="btn btn-primary btn-sm">Learn More</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: JavaScript -->
+        <div class="section-card" id="section-5">
+            <h2 class="section-title">JavaScript</h2>
+            
+            <div class="subsection">
+                <h3>What is JavaScript?</h3>
+                <p>JavaScript is a dynamic programming language that brings interactivity to web pages. It runs in the browser (client-side) and can manipulate HTML, CSS, and respond to user actions in real-time.</p>
+            </div>
+
+            <div class="subsection">
+                <h3>Core Concepts</h3>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Variables:</strong> Store data (let, const, var)</li>
+                    <li><strong>Data Types:</strong> String, Number, Boolean, Object, Array</li>
+                    <li><strong>Functions:</strong> Reusable blocks of code</li>
+                    <li><strong>DOM Manipulation:</strong> Change HTML and CSS with JavaScript</li>
+                    <li><strong>Event Handling:</strong> Respond to user interactions</li>
+                    <li><strong>Async Operations:</strong> Fetch data, promises, async/await</li>
+                </ul>
+            </div>
+
+            <div class="subsection">
+                <h3>Basic JavaScript Examples</h3>
+                <div class="code-example">
+                    <code>
+// Variables and Data Types<br>
+const name = "John";<br>
+const age = 25;<br>
+const isStudent = true;<br>
+<br>
+// Array<br>
+const colors = ["red", "green", "blue"];<br>
+<br>
+// Function<br>
+function greet(name) {<br>
+&nbsp;&nbsp;return `Hello, ${name}!`;<br>
+}
+                    </code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>DOM Manipulation</h3>
+                <div class="code-example">
+                    <code>
+// Select elements<br>
+const button = document.getElementById("btn");<br>
+const paragraph = document.querySelector(".text");<br>
+<br>
+// Modify content<br>
+paragraph.textContent = "New content";<br>
+<br>
+// Add event listener<br>
+button.addEventListener("click", function() {<br>
+&nbsp;&nbsp;alert("Button clicked!");<br>
+});
+                    </code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Interactive Demonstrations</h3>
+            </div>
+
+            <!-- Demo 1: Counter -->
+            <div class="demo-box js-demo">
+                <div class="demo-title">Demo 1: Counter Application</div>
+                <p>Click the buttons to increment, decrement, or reset the counter:</p>
+                <div class="counter-display" id="counter">0</div>
+                <div class="demo-buttons">
+                    <button class="btn btn-success" onclick="incrementCounter()">+1</button>
+                    <button class="btn btn-danger" onclick="decrementCounter()">-1</button>
+                    <button class="btn btn-secondary" onclick="resetCounter()">Reset</button>
+                </div>
+            </div>
+
+            <!-- Demo 2: Text Transformer -->
+            <div class="demo-box js-demo">
+                <div class="demo-title">Demo 2: Text Transformer</div>
+                <div style="margin: 20px 0;">
+                    <input type="text" id="textInput" class="form-control" placeholder="Type something...">
+                    <div style="margin-top: 15px;">
+                        <small>Text Length: <strong id="textLength">0</strong> characters</small>
+                    </div>
+                    <div class="demo-buttons" style="margin-top: 10px;">
+                        <button class="btn btn-info btn-sm" onclick="transformText('uppercase')">UPPERCASE</button>
+                        <button class="btn btn-info btn-sm" onclick="transformText('lowercase')">lowercase</button>
+                        <button class="btn btn-info btn-sm" onclick="transformText('reverse')">Reverse</button>
+                    </div>
+                </div>
+                <div style="background: white; padding: 10px; border-radius: 5px; margin-top: 10px;">
+                    <small><strong>Result:</strong></small><br>
+                    <span id="textResult" style="word-break: break-all;"></span>
+                </div>
+            </div>
+
+            <!-- Demo 3: To-Do List -->
+            <div class="demo-box js-demo">
+                <div class="demo-title">Demo 3: To-Do List Manager</div>
+                <div class="todo-container">
+                    <div class="todo-input-group">
+                        <input type="text" id="todoInput" placeholder="Add a new task...">
+                        <button class="btn btn-primary" onclick="addTodo()">Add</button>
+                    </div>
+                    <ul class="todo-list" id="todoList"></ul>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>ES6+ Features</h3>
+                <div class="code-example">
+                    <code>
+// Arrow Functions<br>
+const add = (a, b) => a + b;<br>
+<br>
+// Template Literals<br>
+const message = `Hello, ${name}`;<br>
+<br>
+// Destructuring<br>
+const { name, age } = person;<br>
+<br>
+// Spread Operator<br>
+const newArray = [...oldArray, 4, 5];
+                    </code>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3>Fetch API Example</h3>
+                <div class="code-example">
+                    <code>
+fetch('https://api.example.com/data')<br>
+&nbsp;&nbsp;.then(response => response.json())<br>
+&nbsp;&nbsp;.then(data => console.log(data))<br>
+&nbsp;&nbsp;.catch(error => console.log(error));
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Contact Me -->
+        <div class="section-card" id="section-6">
+            <h2 class="section-title">Contact Me</h2>
+            
+            <div class="subsection">
+                <h3>Get In Touch</h3>
+                <p>Thank you for visiting my portfolio! I'm always interested in hearing about new opportunities, collaborations, or just having a chat about web development. Feel free to reach out using any of the methods below.</p>
+            </div>
+
+            <!-- Contact Information Cards -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <div class="info-card-icon">📧</div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:diwas.adhikari@email.com" style="color: var(--secondary-color); text-decoration: none;">diwas.adhikari@email.com</a></p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">📱</div>
+                    <h4>Phone</h4>
+                    <p>+977-9800000000</p>
+                </div>
+                <div class="info-card">
+                    <div class="info-card-icon">📍</div>
+                    <h4>Location</h4>
+                    <p>Kathmandu, Nepal</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="subsection">
+                <h3>Send Me a Message</h3>
+                <p style="margin-bottom: 20px;">Fill out the form below and I'll get back to you as soon as possible.</p>
+                
+                <div class="contact-form">
+                    <div id="successMessage" class="success-message">
+                        ✅ Thank you! Your message has been sent successfully. I'll get back to you soon!
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactName">Full Name *</label>
+                        <input 
+                            type="text" 
+                            id="contactName" 
+                            placeholder="Your full name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactEmail">Email Address *</label>
+                        <input 
+                            type="email" 
+                            id="contactEmail" 
+                            placeholder="your.email@example.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactSubject">Subject *</label>
+                        <input 
+                            type="text" 
+                            id="contactSubject" 
+                            placeholder="What is this about?"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage">Message *</label>
+                        <textarea 
+                            id="contactMessage" 
+                            placeholder="Your message here... (min 10 characters)"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button 
+                        class="btn btn-primary btn-lg" 
+                        style="width: 100%; font-size: 1.05rem; font-weight: 600;" 
+                        onclick="sendContactForm()"
+                    >
+                        Send Message
+                    </button>
+                </div>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="subsection">
+                <h3>Connect With Me</h3>
+                <p>You can also connect with me on social media platforms:</p>
+                <div class="social-links">
+                    <a href="https://linkedin.com" class="social-link" title="LinkedIn">
+                        <span>💼</span>
+                    </a>
+                    <a href="https://github.com" class="social-link" title="GitHub">
+                        <span>🔗</span>
+                    </a>
+                    <a href="https://twitter.com" class="social-link" title="Twitter">
+                        <span>𝕏</span>
+                    </a>
+                    <a href="https://facebook.com" class="social-link" title="Facebook">
+                        <span>f</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Response Time Info -->
+            <div class="demo-box">
+                <div class="demo-title">Response Time</div>
+                <p style="margin: 0; color: #555;">
+                    <strong>⏱️ Expected Response Time:</strong> 24-48 hours<br><br>
+                    I check my emails regularly and will respond to your inquiry as soon as possible. Thank you for your patience!
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Full Stack Development ePortfolio - Diwas Adhikari | CET138 Assignment 1</p>
+        <p style="font-size: 0.9rem; margin-top: 10px;">All Technologies Demonstrated with Working Examples | <a href="#" onclick="showSection(6)" style="color: white; text-decoration: underline;">Contact Me</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Navigation and Section Management
+        function showSection(sectionIndex) {
+            const sections = document.querySelectorAll('.section-card');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            sections.forEach(section => section.classList.remove('active'));
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            sections[sectionIndex].classList.add('active');
+            navLinks[sectionIndex].classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // JavaScript Demo Functions
+
+        // Counter Application
+        let count = 0;
+        function incrementCounter() {
+            count++;
+            document.getElementById('counter').textContent = count;
+        }
+        function decrementCounter() {
+            count--;
+            document.getElementById('counter').textContent = count;
+        }
+        function resetCounter() {
+            count = 0;
+            document.getElementById('counter').textContent = count;
+        }
+
+        // Text Transformer
+        const textInput = document.getElementById('textInput');
+        const textResult = document.getElementById('textResult');
+        const textLength = document.getElementById('textLength');
+
+        textInput.addEventListener('input', function() {
+            textLength.textContent = this.value.length;
+            textResult.textContent = this.value;
+        });
+
+        function transformText(type) {
+            const input = textInput.value;
+            let result = '';
+            
+            switch(type) {
+                case 'uppercase':
+                    result = input.toUpperCase();
+                    break;
+                case 'lowercase':
+                    result = input.toLowerCase();
+                    break;
+                case 'reverse':
+                    result = input.split('').reverse().join('');
+                    break;
+            }
+            
+            textResult.textContent = result;
+        }
+
+        // To-Do List Manager
+        let todos = [];
+
+        function addTodo() {
+            const input = document.getElementById('todoInput');
+            const task = input.value.trim();
+            
+            if (task === '') {
+                alert('Please enter a task!');
+                return;
+            }
+            
+            todos.push({
+                id: Date.now(),
+                text: task,
+                completed: false
+            });
+            
+            input.value = '';
+            renderTodos();
+        }
+
+        function toggleTodo(id) {
+            todos = todos.map(todo => 
+                todo.id === id ? { ...todo, completed: !todo.completed } : todo
+            );
+            renderTodos();
+        }
+
+        function deleteTodo(id) {
+            todos = todos.filter(todo => todo.id !== id);
+            renderTodos();
+        }
+
+        function renderTodos() {
+            const todoList = document.getElementById('todoList');
+            todoList.innerHTML = '';
+            
+            todos.forEach(todo => {
+                const li = document.createElement('li');
+                li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+                li.innerHTML = `
+                    <span onclick="toggleTodo(${todo.id})" style="cursor: pointer; flex: 1;">${todo.text}</span>
+                    <div class="todo-buttons">
+                        <button class="btn btn-warning btn-sm" onclick="toggleTodo(${todo.id})">Done</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteTodo(${todo.id})">Delete</button>
+                    </div>
+                `;
+                todoList.appendChild(li);
+            });
+        }
+
+        // Allow Enter key to add todo
+        document.getElementById('todoInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addTodo();
+            }
+        });
+
+        // Contact Form Handling
+        function sendContactForm() {
+            const name = document.getElementById('contactName').value.trim();
+            const email = document.getElementById('contactEmail').value.trim();
+            const subject = document.getElementById('contactSubject').value.trim();
+            const message = document.getElementById('contactMessage').value.trim();
+            const successMessage = document.getElementById('successMessage');
+
+            // Validation
+            if (!name || !email || !subject || !message) {
+                alert('❌ Please fill in all fields');
+                return;
+            }
+
+            if (message.length < 10) {
+                alert('❌ Message must be at least 10 characters long');
+                return;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('❌ Please enter a valid email address');
+                return;
+            }
+
+            // Show success message
+            successMessage.classList.add('show');
+
+            // Clear form
+            document.getElementById('contactName').value = '';
+            document.getElementById('contactEmail').value = '';
+            document.getElementById('contactSubject').value = '';
+            document.getElementById('contactMessage').value = '';
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+
+            // Log the data (for development)
+            console.log('Contact Form Data:', {
+                name: name,
+                email: email,
+                subject: subject,
+                message: message,
+                timestamp: new Date()
+            });
+
+            // Optional: Send to a service like Formspree
+            // const formData = new FormData();
+            // formData.append('name', name);
+            // formData.append('email', email);
+            // formData.append('subject', subject);
+            // formData.append('message', message);
+            // 
+            // fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            //     method: 'POST',
+            //     body: formData
+            // }).catch(error => console.log('Error:', error));
+        }
+
+        // Allow Enter key to submit in last field
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactMessage = document.getElementById('contactMessage');
+            if (contactMessage) {
+                contactMessage.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && e.ctrlKey) {
+                        sendContactForm();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
